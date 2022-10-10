@@ -1,0 +1,20 @@
+spring:
+  jmx:
+    enabled: false
+  datasource:
+    url: jdbc:mysql://localhost:3306/barter?useUnicode=yes&serverTimezone=UTC
+    username: root
+    password: root
+    hikari:
+      max-lifetime: 600000            # 10 min - maximum lifetime of a connection in the pool
+      leakDetectionThreshold: 180000  # 3 min - log stacktrace if a query is taking more than leakDetectionThreshold to complete
+      idleTimeout: 600000             # 10 min - after being idle for more than idleTimeout connections being closed if there are more connections than minimumIdle
+      minimumIdle: 5                  # the minimal amount of idle connections that HikariCP tries to maintain in the pool
+      maximumPoolSize: 50             # the maximum amount of connections
+  liquibase:
+    changeLog: classpath:/db/changelog/changelog-master.xml
+
+bookgether:
+  app:
+    jwtSecret: barterSecretKey
+    jwtExpirationMs: 86400000
